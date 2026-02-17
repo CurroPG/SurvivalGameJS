@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juego de Persecución</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Persecución</h1>
+        <p>Simulation &mdash; Strategy pattern · Euclidean pursuit</p>
+    </header>
+
+    <div class="layout">
+
+        <aside class="sidebar">
+
+            <div class="panel">
+                <div class="panel-title">Buenos vivos</div>
+                <div class="buenos-big" id="buenosGrande">0</div>
+                <div class="buenos-sub">agentes activos</div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-title">Estadísticas</div>
+                <div class="counter-row">
+                    <div class="counter-icon good"></div>
+                    <span class="counter-label">Buenos vivos</span>
+                    <span class="counter-value good" id="statBuenos">0</span>
+                </div>
+                <div class="counter-row">
+                    <div class="counter-icon bad"></div>
+                    <span class="counter-label">Malos activos</span>
+                    <span class="counter-value bad" id="statMalos">0</span>
+                </div>
+                <div class="counter-row">
+                    <div class="counter-icon obstacle"></div>
+                    <span class="counter-label">Obstáculos</span>
+                    <span class="counter-value obs" id="statObstaculos">0</span>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-title">Leyenda</div>
+                <div class="legend-row">
+                    <div class="legend-swatch" style="background:var(--good);box-shadow:0 0 6px var(--good)"></div>
+                    Bueno — huye
+                </div>
+                <div class="legend-row">
+                    <div class="legend-swatch" style="background:var(--bad);box-shadow:0 0 6px var(--bad)"></div>
+                    Malo — persigue
+                </div>
+                <div class="legend-row">
+                    <div class="legend-swatch" style="background:var(--obstacle)"></div>
+                    Obstáculo estático
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-title">Control</div>
+                <div class="status" style="margin-bottom:12px">
+                    <span class="dot" id="statusDot"></span>
+                    Estado: <span id="statusText">corriendo</span>
+                </div>
+                <div class="btn-row">
+                    <button class="btn primary" id="btnToggle">Pausa</button>
+                    <button class="btn" id="btnReset">Reset</button>
+                </div>
+            </div>
+
+        </aside>
+
+        <div class="canvas-wrap">
+            <canvas id="gameCanvas"></canvas>
+            <div class="overlay" id="overlay">
+                <h2>EXTINCIÓN</h2>
+                <p>Todos los buenos han sido eliminados</p>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>Juego hecho por Curro Portillo Guerrero. (y claude)</footer>
+
+
+    <script src="js/javascript.js"></script>
+</body>
+
+</html>

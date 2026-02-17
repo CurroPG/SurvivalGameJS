@@ -1,0 +1,344 @@
+:root {
+    --bg: #0a0c10;
+    --panel-bg: #0f1218;
+    --border: #1e2532;
+    --accent: #00ffe7;
+    --bad: #ff3c3c;
+    --good: #39ff14;
+    --obstacle: #8b8b8b;
+    --empty: #111620;
+    --text: #c9d6e3;
+    --dim: #3a4455;
+    --cell: 14px;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Share Tech Mono', monospace;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 20px 40px;
+    gap: 28px;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+header h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: clamp(1.4rem, 4vw, 2.2rem);
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    text-shadow: 0 0 18px var(--accent), 0 0 40px rgba(0, 255, 231, 0.3);
+    text-transform: uppercase;
+}
+
+header p {
+    font-size: 0.75rem;
+    color: var(--dim);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.layout {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 200px;
+}
+
+.panel {
+    background: var(--panel-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 18px 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0.6;
+}
+
+.panel-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-bottom: 14px;
+}
+
+.counter-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.counter-icon {
+    width: 14px;
+    height: 14px;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+.counter-icon.good {
+    background: var(--good);
+    box-shadow: 0 0 8px var(--good);
+}
+
+.counter-icon.bad {
+    background: var(--bad);
+    box-shadow: 0 0 8px var(--bad);
+}
+
+.counter-icon.obstacle {
+    background: var(--obstacle);
+}
+
+.counter-label {
+    font-size: 0.72rem;
+    color: var(--dim);
+    flex: 1;
+    letter-spacing: 0.06em;
+}
+
+.counter-value {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.counter-value.good {
+    color: var(--good);
+    text-shadow: 0 0 10px var(--good);
+}
+
+.counter-value.bad {
+    color: var(--bad);
+    text-shadow: 0 0 10px var(--bad);
+}
+
+.counter-value.obs {
+    color: var(--obstacle);
+}
+
+.buenos-big {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--good);
+    text-shadow: 0 0 30px var(--good), 0 0 60px rgba(57, 255, 20, 0.25);
+    line-height: 1;
+    text-align: center;
+    padding: 8px 0 4px;
+    transition: color 0.3s;
+}
+
+.buenos-big.danger {
+    color: var(--bad);
+    text-shadow: 0 0 30px var(--bad);
+}
+
+.buenos-sub {
+    text-align: center;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--dim);
+    text-transform: uppercase;
+}
+
+.legend-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.7rem;
+    color: var(--dim);
+    margin-bottom: 6px;
+    letter-spacing: 0.04em;
+}
+
+.legend-swatch {
+    width: 12px;
+    height: 12px;
+    border-radius: 1px;
+    flex-shrink: 0;
+}
+
+.status {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--dim);
+}
+
+.status span {
+    color: var(--accent);
+}
+
+.dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--good);
+    margin-right: 6px;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.2;
+    }
+}
+
+.dot.stopped {
+    background: var(--bad);
+    animation: none;
+}
+
+.btn-row {
+    display: flex;
+    gap: 8px;
+}
+
+.btn {
+    flex: 1;
+    padding: 8px 0;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: transparent;
+    color: var(--text);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.18s;
+}
+
+.btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    box-shadow: 0 0 12px rgba(0, 255, 231, 0.15);
+}
+
+.btn.primary {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.btn.primary:hover {
+    background: rgba(0, 255, 231, 0.08);
+}
+
+.canvas-wrap {
+    position: relative;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow:
+        0 0 0 1px #0f1218,
+        0 0 40px rgba(0, 255, 231, 0.06),
+        0 4px 40px rgba(0, 0, 0, 0.6);
+}
+
+.canvas-wrap::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        repeating-linear-gradient(0deg,
+            rgba(0, 0, 0, 0.03) 0px,
+            rgba(0, 0, 0, 0.03) 1px,
+            transparent 1px,
+            transparent var(--cell)),
+        repeating-linear-gradient(90deg,
+            rgba(0, 0, 0, 0.03) 0px,
+            rgba(0, 0, 0, 0.03) 1px,
+            transparent 1px,
+            transparent var(--cell));
+    z-index: 1;
+}
+
+canvas {
+    display: block;
+}
+
+.overlay {
+    display: none;
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 12, 16, 0.88);
+    z-index: 10;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+}
+
+.overlay.show {
+    display: flex;
+}
+
+.overlay h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--bad);
+    text-shadow: 0 0 30px var(--bad);
+    letter-spacing: 0.2em;
+}
+
+.overlay p {
+    font-size: 0.8rem;
+    color: var(--dim);
+    letter-spacing: 0.1em;
+}
+
+footer {
+    font-size: 0.62rem;
+    color: var(--dim);
+    letter-spacing: 0.1em;
+    opacity: 0.5;
+}
